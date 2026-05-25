@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MECENATE STUDIO - Cinematic Identities</title>
+    <style>
+        /* TIPOGRAFÍA Y VARIABLES ESTILO A24 */
+        :root {
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --color-bg: #ffffff; 
+            --color-text: #000000;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-main);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* HEADER COMPLETAMENTE CENTRADO */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 40px;
+            font-size: 15px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 12px; 
+            padding-left: 52px; 
+            z-index: 100;
+            background-color: #ffffff; 
+            color: #000000;
+            border-bottom: 1px solid #eaeaea;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* HERO VIDEO (CORREGIDO PARA BUCLE) */
+        .hero-section {
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            position: relative;
+            padding-top: 70px; 
+        }
+
+        .hero-section video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
+        }
+
+        /* TÍTULOS DE SECCIÓN */
+        .section-header {
+            padding: 80px 40px 40px 40px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: clamp(30px, 5vw, 60px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        /* SERVICIOS */
+        .service-section {
+            padding: 0 40px 80px 40px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .grid-item {
+            position: relative;
+            aspect-ratio: 4 / 5;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .service-caption {
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* FRAME DE RESPIRO */
+        .breathing-frame {
+            padding: 150px 40px;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .breathing-text {
+            font-size: clamp(24px, 4vw, 40px);
+            font-weight: 400;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        /* RECORRIDO ACADÉMICO */
+        .about-section {
+            padding: 100px 40px;
+            max-width: 1800px;
+            margin: 0 auto;
+            border-top: 1px solid #000;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            aspect-ratio: 3 / 4;
+            background-color: #e0e0e0;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%); 
+            transition: transform 0.8s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-title {
+            font-size: clamp(40px, 4vw, 60px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .about-subtitle {
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            color: #555;
+        }
+
+        .academic-timeline {
+            list-style: none;
+            border-top: 2px solid #000;
+        }
+
+        .academic-timeline li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            border-bottom: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .academic-timeline span.year {
+            font-weight: 700;
+            font-family: monospace;
+            font-size: 18px;
+            width: 100px;
+            flex-shrink: 0;
+        }
+
+        .academic-timeline span.degree {
+            flex-grow: 1;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 14px;
+            padding-right: 20px;
+        }
+
+        .academic-timeline span.school {
+            text-align: right;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* INFORMACIÓN PERSONAL Y CONTACTO */
+        .footer-info {
+            padding: 100px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid #000;
+        }
+
+        .info-block p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .credits-list {
+            list-style: none;
+        }
+
+        .credits-list li {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eaeaea;
+            padding: 15px 0;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .credits-list span:first-child { font-weight: 700; }
+
+        /* OPTIMIZACIÓN MOBILE */
+        @media (max-width: 768px) {
+            header { padding: 20px 20px 20px 32px; font-size: 13px; letter-spacing: 8px; }
+            .section-header { padding: 60px 20px 30px 20px; }
+            .service-section, .about-section { padding: 0 20px 60px 20px; }
+            .grid-container, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .academic-timeline li { 
+                flex-direction: column; 
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .academic-timeline span.school { text-align: left; }
+            .breathing-frame { padding: 100px 20px; }
+            .footer-info { grid-template-columns: 1fr; padding: 60px 20px; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div>MECENATE</div>
+    </header>
+
+    <section class="hero-section">
+        <video autoplay loop muted playsinline>
+            <source src="hero.mov" type="video/quicktime">
+        </video>
+    </section>
+
+    <section class="section-header">
+        <h2 class="section-title">Relatos Visuales</h2>
+    </section>
+    <section class="service-section">
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="foto1.jpg" alt="Storytelling 1">
+                <div class="service-caption">Dirección Cinematográfica</div>
+            </div>
+            <div class="grid-item">
+                <img src="foto2.jpg" alt="Storytelling 2">
+                <div class="service-caption">Identidad de Marca</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-header" style="border-top: 1px solid #000;">
+        <h2 class="section-title">Sedes Digitales</h2>
+    </section>
+    <section class="service-section">
+        <div class="grid-container">
+            <div class="grid-item" style="aspect-ratio: 16/9; grid-column: 1 / -1;">
+                <img src="foto3.jpg" alt="Web Design">
+                <div class="service-caption">Diseño Web de Autor</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="breathing-frame">
+        <p class="breathing-text">"El silencio visual y la composición cuidada son el verdadero lujo para que tu marca destaque en la era digital."</p>
+    </section>
+
+    <section class="about-section">
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="gilbert-foto.jpg" alt="Retrato de Gilbert Charris">
+            </div>
+            <div class="about-text">
+                <h2 class="about-title">Gilbert Charris</h2>
+                <h3 class="about-subtitle">Director & Lead Designer</h3>
+                
+                <ul class="academic-timeline">
+                    <li>
+                        <span class="degree">Master International Filmmaking</span>
+                        <span class="school">Scola Superior de Cine de Catalunya, Barcelona - Roma</span>
+                    </li>
+                    <li>
+                        <span class="degree">Grado en Diseño para la Industria Sostenible y el Territorio</span>
+                        <span class="school">Roma</span>
+                    </li>
+                    <li>
+                        <span class="degree">Master in Marketing Cultural</span>
+                        <span class="school">Gemma Business School Roma</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-info">
+        <div class="info-block">
+            <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">La Agencia</h3>
+            <p>Mecenate Studio transforma espacios y marcas en relatos cinematográficos inolvidables. Dominamos el entorno digital y el espacio urbano para crear un ecosistema visual coherente, posicionando a tu proyecto como un referente de autor.</p>
+        </div>
+        
+        <div class="info-block">
+            <ul class="credits-list">
+                <li><span>Director</span> <span>Gilbert Charris</span></li>
+                <li><span>Base</span> <span>Barcelona / Rome</span></li>
+                <li><span>Expertise</span> <span>Cinematography & Web Design</span></li>
+                <li><span>Email</span> <span>Gilberto-charris@hotmail.com</span></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        let lastScrollTop = 0;
+        let scrollTimeout;
+        const header = document.getElementById('main-header');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            window.clearTimeout(scrollTimeout);
+
+            if (scrollTop > lastScrollTop) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+
+            scrollTimeout = setTimeout(() => {
+                if (scrollTop > 50) {
+                    header.classList.add('header-hidden');
+                }
+            }, 1500); 
+        });
+    </script>
+
+</body>
+</html>
