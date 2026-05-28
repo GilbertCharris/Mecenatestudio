@@ -5,6 +5,557 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MECENATE STUDIO - Cinematic Identities</title>
     <style>
+        /* TIPOGRAFÍA Y VARIABLES */
+        :root {
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --color-bg: #ffffff; 
+            --color-text: #000000;
+            --color-grey-bg: #f4f4f4; /* Fondo sutil para las imágenes */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-main);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* HEADER COMPLETAMENTE CENTRADO */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 40px;
+            font-size: 15px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 12px; 
+            padding-left: 52px; 
+            z-index: 100;
+            background-color: #ffffff; 
+            color: #000000;
+            border-bottom: 1px solid #eaeaea;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* HERO VIDEO */
+        .hero-section {
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            position: relative;
+            padding-top: 70px; 
+        }
+
+        .hero-section video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
+        }
+
+        /* NUEVA SECCIÓN DE SERVICIOS (ESTILO A24) */
+        .services-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid #eaeaea;
+            text-decoration: none; /* Quitamos el subrayado del enlace */
+            color: var(--color-text);
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-row:hover .service-image-container img {
+            transform: scale(1.02);
+        }
+
+        /* Columna de Texto */
+        .service-text {
+            padding: 10vw 6vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .service-category {
+            font-size: 12px;
+            font-weight: 500;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .service-title {
+            font-size: clamp(45px, 6vw, 85px);
+            font-weight: 500;
+            line-height: 0.92;
+            letter-spacing: -0.04em;
+            margin-bottom: 40px;
+            max-width: 90%;
+        }
+
+        .service-action {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .arrow {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        /* Columna de Imagen */
+        .service-image-container {
+            background-color: var(--color-grey-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6vw; /* Espacio limpio alrededor de la imagen */
+        }
+
+        .service-image-container img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3; /* Proporción cinéfila horizontal */
+            object-fit: cover;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08); /* Ligera sombra para separar del fondo */
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* FRAME DE RESPIRO */
+        .breathing-frame {
+            padding: 150px 40px;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .breathing-text {
+            font-size: clamp(24px, 4vw, 40px);
+            font-weight: 400;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        /* OPTIMIZACIÓN MOBILE */
+        @media (max-width: 900px) {
+            header { padding: 20px 20px 20px 32px; font-size: 13px; letter-spacing: 8px; }
+            
+            .service-row {
+                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column; /* Apila los elementos */
+            }
+            
+            .service-text {
+                padding: 60px 30px 40px 30px;
+                order: 1; /* El texto va primero arriba */
+            }
+            
+            .service-image-container {
+                padding: 40px 30px 60px 30px;
+                order: 2; /* La imagen va debajo del texto */
+                background-color: #ffffff; /* Fondo blanco en móvil para unificar */
+            }
+
+            .service-image-container img {
+                box-shadow: none; /* Más plano en móvil */
+            }
+
+            .breathing-frame { padding: 100px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div>MECENATE</div>
+    </header>
+
+    <section class="hero-section">
+        <video autoplay loop muted playsinline>
+            <source src="hero.mov" type="video/quicktime">
+        </video>
+    </section>
+
+    <section class="services-wrapper">
+        
+        <a href="#proyectos-film" class="service-row">
+            <div class="service-text">
+                <span class="service-category">Film & Direction</span>
+                <h2 class="service-title">Relatos visuales cinematográficos.</h2>
+                <div class="service-action"><span class="arrow">⟶</span> Ver Proyectos</div>
+            </div>
+            <div class="service-image-container">
+                <img src="foto1.jpg" alt="Relatos visuales cinematográficos">
+            </div>
+        </a>
+
+        <a href="#proyectos-web" class="service-row">
+            <div class="service-text">
+                <span class="service-category">Digital Spaces</span>
+                <h2 class="service-title">Sitios web de autor.</h2>
+                <div class="service-action"><span class="arrow">⟶</span> Ver Proyectos</div>
+            </div>
+            <div class="service-image-container">
+                <img src="foto2.jpg" alt="Sitios web de autor">
+            </div>
+        </a>
+
+        <a href="#proyectos-estrategia" class="service-row">
+            <div class="service-text">
+                <span class="service-category">Strategy & Curation</span>
+                <h2 class="service-title">Gestión de redes y ecosistema.</h2>
+                <div class="service-action"><span class="arrow">⟶</span> Ver Proyectos</div>
+            </div>
+            <div class="service-image-container">
+                <img src="foto3.jpg" alt="Estrategia digital y redes">
+            </div>
+        </a>
+
+    </section>
+
+    <section class="breathing-frame">
+        <p class="breathing-text">"El silencio visual y la composición cuidada son el verdadero lujo para que tu marca destaque en la era digital."</p>
+    </section>
+
+    <script>
+        let lastScrollTop = 0;
+        let scrollTimeout;
+        const header = document.getElementById('main-header');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            window.clearTimeout(scrollTimeout);
+
+            if (scrollTop > lastScrollTop) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+
+            scrollTimeout = setTimeout(() => {
+                if (scrollTop > 50) {
+                    header.classList.add('header-hidden');
+                }
+            }, 1500); 
+        });
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MECENATE STUDIO - Cinematic Identities</title>
+    <style>
+        /* TIPOGRAFÍA Y VARIABLES */
+        :root {
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --color-bg: #ffffff; 
+            --color-text: #000000;
+            --color-grey-bg: #f4f4f4; /* Fondo sutil para las imágenes */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-main);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* HEADER COMPLETAMENTE CENTRADO */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 40px;
+            font-size: 15px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 12px; 
+            padding-left: 52px; 
+            z-index: 100;
+            background-color: #ffffff; 
+            color: #000000;
+            border-bottom: 1px solid #eaeaea;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* HERO VIDEO */
+        .hero-section {
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            position: relative;
+            padding-top: 70px; 
+        }
+
+        .hero-section video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
+        }
+
+        /* NUEVA SECCIÓN DE SERVICIOS (ESTILO A24) */
+        .services-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid #eaeaea;
+            text-decoration: none; /* Quitamos el subrayado del enlace */
+            color: var(--color-text);
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-row:hover .service-image-container img {
+            transform: scale(1.02);
+        }
+
+        /* Columna de Texto */
+        .service-text {
+            padding: 10vw 6vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .service-category {
+            font-size: 12px;
+            font-weight: 500;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .service-title {
+            font-size: clamp(45px, 6vw, 85px);
+            font-weight: 500;
+            line-height: 0.92;
+            letter-spacing: -0.04em;
+            margin-bottom: 40px;
+            max-width: 90%;
+        }
+
+        .service-action {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .arrow {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        /* Columna de Imagen */
+        .service-image-container {
+            background-color: var(--color-grey-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6vw; /* Espacio limpio alrededor de la imagen */
+        }
+
+        .service-image-container img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3; /* Proporción cinéfila horizontal */
+            object-fit: cover;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08); /* Ligera sombra para separar del fondo */
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* FRAME DE RESPIRO */
+        .breathing-frame {
+            padding: 150px 40px;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .breathing-text {
+            font-size: clamp(24px, 4vw, 40px);
+            font-weight: 400;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        /* OPTIMIZACIÓN MOBILE */
+        @media (max-width: 900px) {
+            header { padding: 20px 20px 20px 32px; font-size: 13px; letter-spacing: 8px; }
+            
+            .service-row {
+                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column; /* Apila los elementos */
+            }
+            
+            .service-text {
+                padding: 60px 30px 40px 30px;
+                order: 1; /* El texto va primero arriba */
+            }
+            
+            .service-image-container {
+                padding: 40px 30px 60px 30px;
+                order: 2; /* La imagen va debajo del texto */
+                background-color: #ffffff; /* Fondo blanco en móvil para unificar */
+            }
+
+            .service-image-container img {
+                box-shadow: none; /* Más plano en móvil */
+            }
+
+            .breathing-frame { padding: 100px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div>MECENATE</div>
+    </header>
+
+    <section class="hero-section">
+        <video autoplay loop muted playsinline>
+            <source src="hero.mov" type="video/quicktime">
+        </video>
+    </section>
+
+    <section class="services-wrapper">
+        
+        <a href="#proyectos-film" class="service-row">
+            <div class="service-text">
+                <span class="service-category">Film & Direction</span>
+                <h2 class="service-title">Relatos visuales cinematográficos.</h2>
+                <div class="service-action"><span class="arrow">⟶</span> Ver Proyectos</div>
+            </div>
+            <div class="service-image-container">
+                <img src="foto1.jpg" alt="Relatos visuales cinematográficos">
+            </div>
+        </a>
+
+        <a href="#proyectos-web" class="service-row">
+            <div class="service-text">
+                <span class="service-category">Digital Spaces</span>
+                <h2 class="service-title">Sitios web de autor.</h2>
+                <div class="service-action"><span class="arrow">⟶</span> Ver Proyectos</div>
+            </div>
+            <div class="service-image-container">
+                <img src="foto2.jpg" alt="Sitios web de autor">
+            </div>
+        </a>
+
+        <a href="#proyectos-estrategia" class="service-row">
+            <div class="service-text">
+                <span class="service-category">Strategy & Curation</span>
+                <h2 class="service-title">Gestión de redes y ecosistema.</h2>
+                <div class="service-action"><span class="arrow">⟶</span> Ver Proyectos</div>
+            </div>
+            <div class="service-image-container">
+                <img src="foto3.jpg" alt="Estrategia digital y redes">
+            </div>
+        </a>
+
+    </section>
+
+    <section class="breathing-frame">
+        <p class="breathing-text">"El silencio visual y la composición cuidada son el verdadero lujo para que tu marca destaque en la era digital."</p>
+    </section>
+
+    <script>
+        let lastScrollTop = 0;
+        let scrollTimeout;
+        const header = document.getElementById('main-header');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            window.clearTimeout(scrollTimeout);
+
+            if (scrollTop > lastScrollTop) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+
+            scrollTimeout = setTimeout(() => {
+                if (scrollTop > 50) {
+                    header.classList.add('header-hidden');
+                }
+            }, 1500); 
+        });
+    </script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MECENATE STUDIO - Cinematic Identities</title>
+    <style>
         /* TIPOGRAFÍA Y VARIABLES ESTILO A24 */
         :root {
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
