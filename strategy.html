@@ -1,249 +1,263 @@
+cat << 'EOF' > strategy.html
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy & Curation - MECENATE STUDIO</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --grey: #f4f4f4;
+            --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
 
-<title>Relatos Visuales Cinematográficos</title>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
 
-:root{
-    --bg:#ffffff;
-    --text:#000000;
-    --grey:#f4f4f4;
-    --font:'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
+        /* HEADER CENTRADO PERFECTO Y ANIMADO */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 12px;
+            z-index: 100;
+            background-color: #ffffff;
+            color: #000000;
+            border-bottom: 1px solid #eaeaea;
+            transition: transform 0.4s ease-in-out;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        header a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--font);
-    -webkit-font-smoothing:antialiased;
-}
+        /* TRUCO VISUAL: Compensa el espacio de la última letra para centrado perfecto */
+        header div { margin-right: -12px; }
+        .header-hidden { transform: translateY(-100%); }
 
-/* HEADER */
+        /* HERO IMAGE */
+        .hero {
+            width: 100%;
+            height: 75vh;
+            overflow: hidden;
+            margin-top: 80px;
+            background: black;
+        }
 
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:30px 40px;
-    background:white;
-    border-bottom:1px solid #eaeaea;
-    z-index:100;
-}
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(120%);
+        }
 
-header a{
-    text-decoration:none;
-    color:black;
-    font-size:14px;
-    letter-spacing:8px;
-    font-weight:600;
-}
+        /* TITULO GIGANTE */
+        .title-section {
+            padding: 120px 8vw 60px;
+        }
 
-/* HERO IMAGE */
+        .title-section h1 {
+            font-size: clamp(60px, 9vw, 150px);
+            line-height: 0.9;
+            letter-spacing: -0.06em;
+            font-weight: 500;
+            max-width: 1200px;
+        }
 
-.hero{
-    width:100%;
-    height:75vh;
-    overflow:hidden;
-    margin-top:80px;
-    background:black;
-}
+        /* TEXTO MANIFIESTO */
+        .intro {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0 140px;
+        }
 
-.hero img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    filter:grayscale(100%) contrast(120%);
-}
+        .intro p {
+            width: min(700px, 90%);
+            font-size: 28px;
+            line-height: 1.45;
+            letter-spacing: -0.02em;
+        }
 
-/* TITULO GIGANTE */
+        /* SECCIÓN EDITORIAL */
+        .editorial {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 900px;
+        }
 
-.title-section{
-    padding:120px 8vw 60px;
-}
+        .editorial-text {
+            padding: 8vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.title-section h1{
-    font-size:clamp(60px, 9vw, 150px);
-    line-height:0.9;
-    letter-spacing:-0.06em;
-    font-weight:500;
-    max-width:1200px;
-}
+        .editorial-text h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            color: #555;
+        }
 
-/* TEXTO MANIFIESTO */
+        .editorial-text p {
+            font-size: 24px;
+            line-height: 1.7;
+            max-width: 700px;
+        }
 
-.intro{
-    display:flex;
-    justify-content:center;
-    padding:20px 0 140px;
-}
+        .editorial-image {
+            overflow: hidden;
+            background: #f4f4f4;
+        }
 
-.intro p{
-    width:min(700px,90%);
-    font-size:28px;
-    line-height:1.45;
-    letter-spacing:-0.02em;
-}
+        .editorial-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+        }
 
-/* SECCIÓN EDITORIAL */
+        /* CTA FINAL */
+        .cta {
+            padding: 180px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.editorial{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    min-height:900px;
-}
+        .cta p {
+            font-size: 42px;
+            line-height: 1.3;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            letter-spacing: -0.02em;
+        }
 
-.editorial-text{
-    padding:8vw;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
+        .cta a {
+            display: inline-block;
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid black;
+            padding-bottom: 5px;
+            transition: opacity 0.3s ease;
+        }
 
-.editorial-text h2{
-    font-size:14px;
-    text-transform:uppercase;
-    letter-spacing:3px;
-    margin-bottom:40px;
-}
+        .cta a:hover {
+            opacity: 0.5;
+        }
 
-.editorial-text p{
-    font-size:24px;
-    line-height:1.7;
-    max-width:700px;
-}
-
-.editorial-image{
-    overflow:hidden;
-    background:#f4f4f4;
-}
-
-.editorial-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    filter:grayscale(100%);
-}
-
-/* CTA FINAL */
-
-.cta{
-    padding:180px 20px;
-    text-align:center;
-}
-
-.cta p{
-    font-size:42px;
-    line-height:1.3;
-    max-width:900px;
-    margin:0 auto 50px;
-}
-
-.cta a{
-    text-decoration:none;
-    color:black;
-    font-size:18px;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    border-bottom:1px solid black;
-    padding-bottom:8px;
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-    .editorial{
-        grid-template-columns:1fr;
-    }
-
-    .editorial-image{
-        height:500px;
-    }
-
-    .intro p{
-        font-size:22px;
-    }
-
-    .editorial-text p{
-        font-size:20px;
-    }
-
-    .cta p{
-        font-size:30px;
-    }
-
-}
-
-</style>
-
+        /* MOBILE */
+        @media(max-width: 900px) {
+            header { padding: 20px; font-size: 12px; letter-spacing: 8px; }
+            header div { margin-right: -8px; }
+            
+            .hero { margin-top: 60px; height: 60vh; }
+            
+            .title-section { padding: 80px 20px 40px; }
+            
+            .editorial { grid-template-columns: 1fr; min-height: auto; }
+            .editorial-text { padding: 60px 20px; }
+            .editorial-image { height: 500px; }
+            
+            .intro { padding: 0 20px 80px; }
+            .intro p { font-size: 22px; }
+            .editorial-text p { font-size: 20px; }
+            .cta { padding: 100px 20px; }
+            .cta p { font-size: 30px; }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-    <a href="index.html">MECENATE</a>
-</header>
+    <header id="main-header">
+        <a href="index.html"><div>MECENATE</div></a>
+    </header>
 
-<section class="hero">
-   <img src="foto3.jpg">
-</section>
+    <section class="hero">
+        <img src="foto3.jpg" alt="Strategy & Curation Hero">
+    </section>
 
-<section class="title-section">
-    <h1>
-        Digital Spaces (Sedes Digitales)
-    </h1>
-</section>
+    <section class="title-section">
+        <h1>Strategy & Curation<br>(Gestión de Ecosistemas)</h1>
+    </section>
 
-<section class="intro">
+    <section class="intro">
+        <p>La presencia online no trata de acumular interacciones vacías, sino de construir un legado cultural. Entendemos las redes sociales como galerías de arte contemporáneo: cada publicación debe tener un propósito, una intención estética y un lugar específico dentro de la narrativa global de tu marca.</p>
+    </section>
 
-<p>
- La presencia online no trata de acumular interacciones vacías, sino de construir un legado cultural. Entendemos las redes sociales como galerías de arte contemporáneo: cada publicación debe tener un propósito, una intención estética y un lugar específico dentro de la narrativa global de tu marca.
-</p>
+    <section class="editorial">
+        <div class="editorial-text">
+            <h2>Nuestro enfoque</h2>
+            <p>Aplicamos la curaduría artística a la estrategia digital. Filtramos la saturación para amplificar tu voz. No perseguimos las tendencias efímeras; diseñamos una hoja de ruta sólida que alinea tu contenido con los valores fundamentales de tu proyecto. Nos encargamos de la dirección creativa, la planificación visual y la cohesión de todos tus canales digitales, posicionándote como un referente estético y conceptual en tu sector. Menos ruido, más significado.</p>
+        </div>
+        <div class="editorial-image">
+            <img src="foto3.jpg" alt="Enfoque de estrategia">
+        </div>
+    </section>
 
-</section>
+    <section class="cta">
+        <p>Definamos juntos el legado digital de tu estudio.</p>
+        <a href="mailto:Gilberto-charris@hotmail.com">⟶ Iniciar un Proyecto</a>
+    </section>
 
-<section class="editorial">
+    <script>
+        let lastScrollTop = 0;
+        let scrollTimeout;
+        const header = document.getElementById('main-header');
 
-<div class="editorial-text">
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            window.clearTimeout(scrollTimeout);
 
-<h2>Nuestro enfoque</h2>
+            if (scrollTop > lastScrollTop) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 
-<p>
-Aplicamos la curaduría artística a la estrategia digital. Filtramos la saturación para amplificar tu voz. No perseguimos las tendencias efímeras; diseñamos una hoja de ruta sólida que alinea tu contenido con los valores fundamentales de tu proyecto. Nos encargamos de la dirección creativa, la planificación visual y la cohesión de todos tus canales digitales, posicionándote como un referente estético y conceptual en tu sector. Menos ruido, más significado.
-</p>
-
-</div>
-
-<div class="editorial-image">
-    <img src="foto3.jpg">
-</div>
-
-</section>
-
-<section class="cta">
-
-<p>
-Definamos juntos el legado digital de tu estudio.
-</p>
-
-<a href="mailto:Gilberto-charris@hotmail.com">
-⟶ Iniciar un Proyecto
-</a>
-
-</section>
+            // Ocultar si deja de hacer scroll después de 1.5s
+            scrollTimeout = setTimeout(() => {
+                if (scrollTop > 50) {
+                    header.classList.add('header-hidden');
+                }
+            }, 1500); 
+        });
+    </script>
 
 </body>
 </html>
