@@ -502,16 +502,18 @@
     <section class="hero-section">
 
         <video
-            id="hero-video"
-            autoplay
-            muted
-            loop
-            playsinline
-            webkit-playsinline
-            preload="auto"
-        >
-            <source src="hero.mp4" type="video/mp4">
-        </video>
+           <video
+    id="hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+    preload="auto"
+    poster="hero-poster.jpg"
+>
+    <source src="hero.mp4" type="video/mp4">
+</video>
 
         <div class="hero-overlay"></div>
 
@@ -755,7 +757,24 @@
 
         });
 
-    </script>
+    </script> 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const video = document.getElementById("hero-video");
+
+    video.muted = true;
+    video.play();
+
+    function forcePlay() {
+        video.play();
+        document.removeEventListener("touchstart", forcePlay);
+    }
+
+    document.addEventListener("touchstart", forcePlay);
+
+});
+</script>
 
 </body>
 </html>
