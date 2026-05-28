@@ -1,4 +1,3 @@
-cat << 'EOF' > index.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -64,20 +63,6 @@ cat << 'EOF' > index.html
             position: absolute;
             top: 0; left: 0;
             z-index: 0;
-        }
-
-        /* CAPTION DEL HERO */
-        .hero-caption {
-            position: absolute;
-            bottom: 35px;
-            right: 45px;
-            z-index: 10;
-            color: #ffffff;
-            font-size: 12px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-weight: 500;
-            opacity: 0.8;
         }
 
         /* SECCIÓN DE SERVICIOS - DISEÑO ZIG-ZAG */
@@ -161,12 +146,21 @@ cat << 'EOF' > index.html
             object-fit: cover;
             box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
             transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+.service-image-container img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3; 
+            object-fit: cover;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            /* EL TOQUE A24: Blanco y negro, más contraste y ligeramente más oscura */
             filter: grayscale(100%) contrast(125%) brightness(90%);
         }
 
-        /* FRAME DE RESPIRO PROPORCIONADO */
+        /* FRAME DE RESPIRO */
         .breathing-frame {
-            padding: 100px 40px; /* Reducción del padding para proporcionar el cuadro negro */
+            padding: 150px 40px;
             text-align: center;
             background-color: #000;
             color: #fff;
@@ -176,37 +170,39 @@ cat << 'EOF' > index.html
             justify-content: center;
         }
 
-        .breathing-text {
-            font-size: clamp(14px, 1.8vw, 22px); /* Tamaño de letra más pequeño y minimalista */
-            font-weight: 400; /* Peso de fuente más ligero */
-            text-transform: uppercase;
-            letter-spacing: 5px; /* Aumento del espaciado para compensar el tamaño menor */
-            margin-bottom: 8px;
-            line-height: 1.5;    
-            max-width: 900px;
-        }
-
-        /* RECORRIDO ACADÉMICO Y PERFIL MINIMALISTA */
+    .breathing-text {font-size: clamp(24px, 3vw, 32px); 
+    font-weight: 500; /* Bajamos de 700 a 500 para quitarle peso visual */
+    text-transform: uppercase;
+    letter-spacing: 4px; /* Más espacio entre letras da un aire muy editorial */
+    margin-bottom: 8px;
+    line-height: 1.2;    }
+.about-subtitle {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 400; 
+    letter-spacing: 2px;
+    margin-bottom: 60px; /* Más margen inferior para separar visualmente tu nombre de la lista */
+    color: #888;
+}
+        /* RECORRIDO ACADÉMICO (TU INFORMACIÓN ORIGINAL) */
         .about-section {
             padding: 100px 40px;
-            max-width: 1400px; 
+            max-width: 1800px;
             margin: 0 auto;
             border-top: 1px solid #000;
         }
 
         .about-grid {
             display: grid;
-            grid-template-columns: 0.8fr 1.2fr; 
-            gap: 80px;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
             align-items: center;
         }
 
         .about-image {
-            aspect-ratio: 16 / 9; 
+            aspect-ratio: 3 / 4;
             background-color: #e0e0e0;
             overflow: hidden;
-            width: 100%;
-            max-width: 450px; 
         }
 
         .about-image img {
@@ -226,56 +222,52 @@ cat << 'EOF' > index.html
         }
 
         .about-title {
-            font-size: clamp(28px, 3vw, 42px); 
+            font-size: clamp(40px, 4vw, 60px);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: -0.02em;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             line-height: 1;
         }
 
         .about-subtitle {
-            font-size: 12px;
+            font-size: 14px;
             text-transform: uppercase;
-            font-weight: 400; 
-            letter-spacing: 2px;
-            margin-bottom: 50px;
-            color: #888;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            color: #555;
         }
 
         .academic-timeline {
             list-style: none;
-            border-top: 1px solid #000; 
+            border-top: 2px solid #000;
         }
 
         .academic-timeline li {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #eaeaea;
-            font-size: 14px; 
+            padding: 25px 0;
+            border-bottom: 1px solid #ccc;
+            font-size: 16px;
         }
 
         .academic-timeline span.degree {
             flex-grow: 1;
             text-transform: uppercase;
             font-weight: 700;
-            font-size: 12px; /* Reducido ligeramente para acomodar textos más largos */
+            font-size: 14px;
             padding-right: 20px;
-            line-height: 1.4;
         }
 
         .academic-timeline span.school {
             text-align: right;
             font-style: italic;
             color: #555;
-            font-size: 13px;
-            max-width: 40%;
-            line-height: 1.4;
         }
 
-        /* INFORMACIÓN PERSONAL Y CONTACTO */
+        /* INFORMACIÓN PERSONAL Y CONTACTO (TU FOOTER ORIGINAL) */
         .footer-info {
             padding: 100px 40px;
             display: grid;
@@ -286,19 +278,10 @@ cat << 'EOF' > index.html
             border-top: 1px solid #000;
         }
 
-        .info-block h3 {
-            font-size: 18px; 
-            font-weight: 700; 
-            margin-bottom: 20px; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
         .info-block p {
-            font-size: 16px;
+            font-size: 18px;
             line-height: 1.6;
             margin-bottom: 20px;
-            color: #333;
         }
 
         .credits-list { list-style: none; }
@@ -308,9 +291,8 @@ cat << 'EOF' > index.html
             justify-content: space-between;
             border-bottom: 1px solid #eaeaea;
             padding: 15px 0;
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .credits-list span:first-child { font-weight: 700; }
@@ -319,14 +301,13 @@ cat << 'EOF' > index.html
         @media (max-width: 900px) {
             header { padding: 20px 20px 20px 32px; font-size: 13px; letter-spacing: 8px; }
             
-            .hero-caption { bottom: 20px; right: 20px; font-size: 10px; }
-
             .service-row {
                 grid-template-columns: 1fr;
                 display: flex;
                 flex-direction: column; 
             }
             
+            /* En móvil forzamos siempre el texto arriba y la imagen abajo */
             .service-text {
                 padding: 60px 30px 40px 30px;
                 order: 1 !important; 
@@ -340,18 +321,15 @@ cat << 'EOF' > index.html
 
             .service-image-container img { box-shadow: none; }
 
-            .breathing-frame { padding: 80px 20px; }
-            .breathing-text { font-size: 12px; letter-spacing: 3px; }
-            
+            .breathing-frame { padding: 100px 20px; }
             .about-section { padding: 0 20px 60px 20px; }
             .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .about-image { max-width: 100%; aspect-ratio: 16 / 9; }
             .academic-timeline li { 
                 flex-direction: column; 
                 align-items: flex-start;
                 gap: 10px;
             }
-            .academic-timeline span.school { text-align: left; max-width: 100%; }
+            .academic-timeline span.school { text-align: left; }
             .footer-info { grid-template-columns: 1fr; padding: 60px 20px; gap: 40px; }
         }
     </style>
@@ -366,7 +344,6 @@ cat << 'EOF' > index.html
         <video autoplay loop muted playsinline>
             <source src="hero.mov" type="video/quicktime">
         </video>
-        <div class="hero-caption">Roma - 2025</div>
     </section>
 
     <section class="services-wrapper">
@@ -421,10 +398,6 @@ cat << 'EOF' > index.html
                 
                 <ul class="academic-timeline">
                     <li>
-                        <span class="degree">Premio Atelier Arte Bellezza Cultura - Regione Lazio</span>
-                        <span class="school">Marketing "Napoleone (e Traiano) alla conquista dei social network"</span>
-                    </li>
-                    <li>
                         <span class="degree">Master International Filmmaking</span>
                         <span class="school">Scola Superior de Cine de Catalunya, Barcelona - Roma</span>
                     </li>
@@ -443,16 +416,16 @@ cat << 'EOF' > index.html
 
     <footer class="footer-info">
         <div class="info-block">
-            <h3>La Agencia</h3>
-            <p>Mecenate Studio transforma espacios y marcas en relatos cinematográficos memorables. Dominamos el entorno digital para crear un ecosistema visual coherente, posicionando  tu proyecto como un referente de autor.</p>
+            <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;">La Agencia</h3>
+            <p>Mecenate Studio transforma espacios y marcas en relatos cinematográficos inolvidables. Dominamos el entorno digital y el espacio urbano para crear un ecosistema visual coherente, posicionando a tu proyecto como un referente de autor.</p>
         </div>
         
         <div class="info-block">
             <ul class="credits-list">
-                
+                <li><span>Director</span> <span>Gilbert Charris</span></li>
                 <li><span>Base</span> <span>Barcelona / Rome</span></li>
-                <li><span>Expertise</span> <span>Cinematography & Design</span></li>
-                <li><span>Email</span> <span>mecenatestudio@proton.me</span></li> <li><span>Telefono</span> <span>+(34) 615733036  /  +(39) 3203768590 </span></li>
+                <li><span>Expertise</span> <span>Cinematography & Web Design</span></li>
+                <li><span>Email</span> <span>Gilberto-charris@hotmail.com</span></li>
             </ul>
         </div>
     </footer>
@@ -485,4 +458,3 @@ cat << 'EOF' > index.html
 
 </body>
 </html>
-EOF
