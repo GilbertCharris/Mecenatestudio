@@ -166,7 +166,7 @@ cat << 'EOF' > index.html
 
         /* FRAME DE RESPIRO PROPORCIONADO */
         .breathing-frame {
-            padding: 100px 40px; /* Reducción del padding para proporcionar el cuadro negro */
+            padding: 100px 40px; 
             text-align: center;
             background-color: #000;
             color: #fff;
@@ -177,10 +177,10 @@ cat << 'EOF' > index.html
         }
 
         .breathing-text {
-            font-size: clamp(14px, 1.8vw, 22px); /* Tamaño de letra más pequeño y minimalista */
-            font-weight: 400; /* Peso de fuente más ligero */
+            font-size: clamp(14px, 1.8vw, 22px); 
+            font-weight: 400; 
             text-transform: uppercase;
-            letter-spacing: 5px; /* Aumento del espaciado para compensar el tamaño menor */
+            letter-spacing: 5px; 
             margin-bottom: 8px;
             line-height: 1.5;    
             max-width: 900px;
@@ -261,7 +261,7 @@ cat << 'EOF' > index.html
             flex-grow: 1;
             text-transform: uppercase;
             font-weight: 700;
-            font-size: 12px; /* Reducido ligeramente para acomodar textos más largos */
+            font-size: 12px; 
             padding-right: 20px;
             line-height: 1.4;
         }
@@ -363,7 +363,7 @@ cat << 'EOF' > index.html
     </header>
 
     <section class="hero-section">
-        <video autoplay loop muted playsinline>
+        <video autoplay loop muted playsinline onended="this.play()">
             <source src="hero.mov" type="video/quicktime">
         </video>
         <div class="hero-caption">Roma - 2025</div>
@@ -375,7 +375,7 @@ cat << 'EOF' > index.html
             <div class="service-text">
                 <span class="service-category">Film & Direction</span>
                 <h2 class="service-title">Relatos visuales cinematográficos.</h2>
-                <div class="service-action"><span class="arrow">⟶</span> Ver Proyectos</div>
+                <div class="service-action"><span class="arrow">⟶</span> Explorar enfoque</div>
             </div>
             <div class="service-image-container">
                 <img src="foto1.jpg" alt="Relatos visuales cinematográficos">
@@ -386,7 +386,7 @@ cat << 'EOF' > index.html
             <div class="service-text">
                 <span class="service-category">Digital Spaces</span>
                 <h2 class="service-title">Sitios web de autor.</h2>
-                <div class="service-action"><span class="arrow">⟶</span> Ver Proyectos</div>
+                <div class="service-action"><span class="arrow">⟶</span> Explorar enfoque</div>
             </div>
             <div class="service-image-container">
                 <img src="foto2.jpg" alt="Sitios web de autor">
@@ -397,7 +397,7 @@ cat << 'EOF' > index.html
             <div class="service-text">
                 <span class="service-category">Strategy & Curation</span>
                 <h2 class="service-title">Gestión de redes y ecosistema.</h2>
-                <div class="service-action"><span class="arrow">⟶</span> Ver Proyectos</div>
+                <div class="service-action"><span class="arrow">⟶</span> Explorar enfoque</div>
             </div>
             <div class="service-image-container">
                 <img src="foto3.jpg" alt="Estrategia digital y redes">
@@ -452,7 +452,8 @@ cat << 'EOF' > index.html
                 
                 <li><span>Base</span> <span>Barcelona / Rome</span></li>
                 <li><span>Expertise</span> <span>Cinematography & Design</span></li>
-                <li><span>Email</span> <span>mecenatestudio@proton.me</span></li> <li><span>Telefono</span> <span>+(34) 615733036  /  +(39) 3203768590 </span></li>
+                <li><span>Email</span> <span>mecenatestudio@proton.me</span></li> 
+                <li><span>Telefono</span> <span>+(34) 615733036  /  +(39) 3203768590 </span></li>
             </ul>
         </div>
     </footer>
