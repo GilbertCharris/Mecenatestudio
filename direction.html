@@ -4,11 +4,24 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Strategy & Curation — Mecenate Studio</title>
   <meta name="description" content="Direzione creativa, curatela visiva e strategia narrativa per un’identità digitale coerente.">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#050505">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header"><div class="header-inner"><button class="menu-toggle" aria-label="Apri il menu" aria-expanded="false"><span></span><span></span></button><a class="brand" href="index.html">Mecenate</a></div></header>
-  <nav class="site-menu"><a href="index.html#studio">Studio</a><a href="film.html">Film</a><a href="digital.html">Digital</a><a href="direction.html">Direction</a><a href="index.html#contatti">Contatti</a><div class="menu-footer">Roma · Working internationally</div></nav>
+  <nav class="site-menu"><a href="index.html#studio" data-i18n="nav.studio">Studio</a><a href="film.html">Film</a><a href="digital.html">Digital</a><a href="direction.html" data-i18n="nav.direction">Direction</a><a href="index.html#contatti" data-i18n="nav.contacts">Contatti</a><div class="menu-language" aria-label="Seleziona lingua">
+      <span class="menu-language-label">Lingua</span>
+      <div class="menu-language-options">
+        <button type="button" data-lang="it" class="is-active">Italiano</button>
+        <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="es">Español</button>
+      </div>
+    </div>
+    <div class="menu-footer" data-i18n="menu.footer">Roma · Working internationally</div></nav>
   <main>
     <section class="internal-hero"><img src="foto3.jpg" alt="Materiali di ricerca e direzione creativa"></section>
     <section class="internal-title">

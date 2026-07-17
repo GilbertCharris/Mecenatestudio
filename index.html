@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mecenate Studio — Film, design e identità digitali</title>
   <meta name="description" content="Studio creativo indipendente con base a Roma. Film, spazi digitali e direzione creativa per architettura, design, artigianato e brand contemporanei.">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#050505">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,12 +21,20 @@
   </header>
 
   <nav class="site-menu" aria-label="Navigazione principale">
-    <a href="#studio">Studio</a>
+    <a href="#studio" data-i18n="nav.studio">Studio</a>
     <a href="film.html">Film</a>
     <a href="digital.html">Digital</a>
-    <a href="direction.html">Direction</a>
-    <a href="#contatti">Contatti</a>
-    <div class="menu-footer">Roma · Working internationally</div>
+    <a href="direction.html" data-i18n="nav.direction">Direction</a>
+    <a href="#contatti" data-i18n="nav.contacts">Contatti</a>
+    <div class="menu-language" aria-label="Seleziona lingua">
+      <span class="menu-language-label">Lingua</span>
+      <div class="menu-language-options">
+        <button type="button" data-lang="it" class="is-active">Italiano</button>
+        <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="es">Español</button>
+      </div>
+    </div>
+    <div class="menu-footer" data-i18n="menu.footer">Roma · Working internationally</div>
   </nav>
 
   <main>
@@ -30,43 +43,43 @@
         <source src="hero.mp4" type="video/mp4">
       </video>
       <div class="hero-home-content">
-        <div class="eyebrow">Studio creativo indipendente · Roma</div>
-        <h1>Identità cinematografiche per progetti d’autore.</h1>
-        <p class="hero-description">Film, spazi digitali e direzione creativa per architettura, design, artigianato e brand contemporanei.</p>
-        <a class="hero-link" href="#servizi"><span>Scopri lo studio</span><span class="arrow">⟶</span></a>
+        <div class="eyebrow" data-i18n="home.eyebrow">Studio creativo indipendente · Roma</div>
+        <h1 data-i18n="home.title">Identità cinematografiche per progetti d’autore.</h1>
+        <p class="hero-description" data-i18n="home.description">Film, spazi digitali e direzione creativa per architettura, design, artigianato e brand contemporanei.</p>
+        <a class="hero-link" href="#servizi"><span data-i18n="home.discover">Scopri lo studio</span><span class="arrow">⟶</span></a>
       </div>
     </section>
 
     <section class="services" id="servizi">
-      <a class="service-card reverse" href="film.html">
+      <a class="service-card service-film reverse" href="film.html">
         <div class="service-copy">
           <span class="service-kicker">Film & Direction</span>
-          <h2 class="service-title">Racconti visivi cinematografici.</h2>
-          <span class="inline-link"><span class="arrow">⟶</span> Esplora l’approccio</span>
+          <h2 class="service-title" data-i18n="service.film">Racconti visivi cinematografici.</h2>
+          <span class="inline-link"><span class="arrow">⟶</span> <span data-i18n="service.explore">Esplora l’approccio</span></span>
         </div>
         <div class="service-visual"><img src="foto1.jpg" alt="Set cinematografico in bianco e nero"></div>
       </a>
 
-      <a class="service-card" href="digital.html">
+      <a class="service-card service-digital" href="digital.html">
         <div class="service-copy">
           <span class="service-kicker">Digital Spaces</span>
-          <h2 class="service-title">Siti web d’autore.</h2>
-          <span class="inline-link"><span class="arrow">⟶</span> Esplora l’approccio</span>
+          <h2 class="service-title" data-i18n="service.digital">Siti web d’autore.</h2>
+          <span class="inline-link"><span class="arrow">⟶</span> <span data-i18n="service.explore">Esplora l’approccio</span></span>
         </div>
         <div class="service-visual"><img src="foto2.jpg" alt="Spazio digitale editoriale in bianco e nero"></div>
       </a>
 
-      <a class="service-card reverse" href="direction.html">
+      <a class="service-card service-strategy reverse" href="direction.html">
         <div class="service-copy">
           <span class="service-kicker">Strategy & Curation</span>
-          <h2 class="service-title">Direzione creativa e identità digitale.</h2>
-          <span class="inline-link"><span class="arrow">⟶</span> Esplora l’approccio</span>
+          <h2 class="service-title" data-i18n="service.direction">Direzione creativa e identità digitale.</h2>
+          <span class="inline-link"><span class="arrow">⟶</span> <span data-i18n="service.explore">Esplora l’approccio</span></span>
         </div>
         <div class="service-visual"><img src="foto3.jpg" alt="Materiali di ricerca e curatela visiva"></div>
       </a>
     </section>
 
-    <section class="manifesto"><p>Non creiamo contenuti.<br>Costruiamo atmosfere.</p></section>
+    <section class="manifesto"><p data-i18n-html="home.manifesto">Non creiamo contenuti.<br>Costruiamo atmosfere.</p></section>
 
     <section class="about" id="studio">
       <div class="about-grid">
@@ -98,6 +111,20 @@
       <li><strong>Telefono</strong><a href="tel:+393203768590">+39 320 376 8590</a></li>
     </ul>
   </footer>
+
+
+  <aside class="whatsapp-popup" aria-label="Contatto WhatsApp" aria-hidden="true">
+    <button class="whatsapp-close" type="button" aria-label="Chiudi">×</button>
+    <span class="whatsapp-label">WhatsApp · Roma</span>
+    <p>Hai un progetto da raccontare?</p>
+    <a
+      href="https://wa.me/393203768590?text=Ciao%20Mecenate%20Studio%2C%20vorrei%20parlare%20di%20un%20progetto."
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Parliamone <span>⟶</span>
+    </a>
+  </aside>
 
   <script src="main.js"></script>
 </body>

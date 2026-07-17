@@ -201,6 +201,8 @@ img, video { display: block; max-width: 100%; }
   max-width: 95%;
 }
 .service-visual {
+  position: relative;
+  isolation: isolate;
   background: var(--soft);
   display: flex;
   align-items: center;
@@ -208,15 +210,95 @@ img, video { display: block; max-width: 100%; }
   padding: 6vw;
   overflow: hidden;
 }
+
 .service-visual img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
-  filter: grayscale(100%) contrast(120%);
-  transition: transform .8s cubic-bezier(.2,.8,.2,1);
-  box-shadow: 0 18px 48px rgba(0,0,0,.08);
+  transition: transform 1.15s cubic-bezier(.2,.8,.2,1), filter .8s ease;
+  box-shadow: 0 18px 48px rgba(0,0,0,.10);
 }
-.service-card:hover img { transform: scale(1.025); }
+
+/* Colore analogico: la tinta appartiene al servizio, non alla singola foto. */
+.service-visual::before,
+.service-visual::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.service-visual::before {
+  z-index: 2;
+  inset: 6vw;
+  mix-blend-mode: color;
+  opacity: .82;
+  transition: opacity .8s ease;
+}
+
+.service-visual::after {
+  z-index: 3;
+  inset: calc(6vw - 12%);
+  opacity: .105;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.72'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+  animation: serviceGrain .28s steps(2) infinite;
+}
+
+/* 01 — FILM: rosso tungsteno / pellicola sovraesposta */
+.service-film .service-visual {
+  background: #170806;
+}
+.service-film .service-visual img {
+  filter: saturate(.82) contrast(1.12) brightness(.82) sepia(.18);
+}
+.service-film .service-visual::before {
+  background:
+    linear-gradient(125deg, rgba(255,42,9,.88), rgba(105,8,3,.40) 58%, rgba(10,2,1,.12)),
+    radial-gradient(circle at 72% 25%, rgba(255,180,92,.30), transparent 42%);
+}
+
+/* 02 — DIGITAL: verde oliva / monitor fosforico */
+.service-digital .service-visual {
+  background: #0d1210;
+}
+.service-digital .service-visual img {
+  filter: saturate(.58) contrast(1.04) brightness(.76) sepia(.13);
+}
+.service-digital .service-visual::before {
+  background:
+    linear-gradient(118deg, rgba(28,55,48,.82), rgba(139,139,91,.32) 68%, rgba(7,12,10,.18)),
+    radial-gradient(circle at 22% 18%, rgba(210,213,160,.18), transparent 38%);
+}
+
+/* 03 — STRATEGY: ambra / carta e luce da tavolo */
+.service-strategy .service-visual {
+  background: #170e08;
+}
+.service-strategy .service-visual img {
+  filter: saturate(.68) contrast(1.08) brightness(.78) sepia(.28);
+}
+.service-strategy .service-visual::before {
+  background:
+    linear-gradient(125deg, rgba(129,62,20,.70), rgba(240,155,71,.30) 52%, rgba(34,15,7,.35)),
+    radial-gradient(circle at 66% 36%, rgba(255,201,119,.25), transparent 44%);
+}
+
+.service-card:hover .service-visual img {
+  transform: scale(1.022);
+}
+.service-card:hover .service-visual::before {
+  opacity: .68;
+}
+
+@keyframes serviceGrain {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(-2%,1.5%); }
+  50% { transform: translate(1.5%,-2%); }
+  75% { transform: translate(2%,2%); }
+  100% { transform: translate(-1.5%,-1%); }
+}
 
 /* MANIFESTO */
 .manifesto {
@@ -396,7 +478,9 @@ img, video { display: block; max-width: 100%; }
   .service-card,
   .service-card.reverse { display: flex; flex-direction: column; min-height: 0; }
   .service-copy { order: 1 !important; padding: 72px 24px 42px; }
-  .service-visual { order: 2 !important; padding: 0 24px 70px; background: #fff; }
+  .service-visual { order: 2 !important; padding: 0 24px 70px; }
+  .service-visual::before { inset: 0 24px 70px; }
+  .service-visual::after { inset: -12% -8% calc(70px - 12%) -8%; }
   .service-title { font-size: 13vw; }
   .about { padding: 80px 22px; }
   .about-grid { grid-template-columns: 1fr; gap: 46px; }
@@ -413,4 +497,1203 @@ img, video { display: block; max-width: 100%; }
   .editorial-copy { padding: 72px 22px; }
   .editorial-image { height: 520px; }
   .cta { padding: 105px 22px; }
+}
+/* =========================================================
+   FILM PAGE — MECENATE / FALSE SCROLL
+========================================================= */
+
+.film-page {
+  background: #fff;
+}
+
+/* CINEMATIC IMAGE SYSTEM */
+.cinematic-image {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #090b0a;
+}
+
+.cinematic-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter:
+    saturate(74%)
+    contrast(108%)
+    brightness(91%)
+    sepia(6%);
+  transform: scale(1.012);
+}
+
+.cinematic-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      112deg,
+      rgba(4, 25, 22, 0.14),
+      rgba(102, 83, 46, 0.075)
+    );
+  mix-blend-mode: color;
+}
+
+.cinematic-image::after {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.095;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.75'/%3E%3C/svg%3E");
+  animation: mecenateGrain .22s steps(2) infinite;
+}
+
+.cinematic-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 42%,
+      rgba(0, 0, 0, .08) 70%,
+      rgba(0, 0, 0, .36) 100%
+    );
+}
+
+@keyframes mecenateGrain {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-3%, 2%); }
+  40%  { transform: translate(2%, -4%); }
+  60%  { transform: translate(4%, 3%); }
+  80%  { transform: translate(-2%, -3%); }
+  100% { transform: translate(3%, 1%); }
+}
+
+/* HERO */
+.film-hero {
+  min-height: 100svh;
+  color: #fff;
+}
+
+.film-hero > img {
+  position: absolute;
+  inset: 0;
+}
+
+.film-hero::before {
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.58)),
+    linear-gradient(112deg, rgba(4,25,22,.13), rgba(102,83,46,.06));
+  mix-blend-mode: normal;
+}
+
+.film-hero-copy {
+  position: absolute;
+  z-index: 6;
+  left: 4vw;
+  right: 4vw;
+  bottom: 6vh;
+}
+
+.film-hero-copy h1 {
+  max-width: 1150px;
+  margin-top: 20px;
+  font-size: clamp(70px, 10.2vw, 176px);
+  font-weight: 500;
+  line-height: .82;
+  letter-spacing: -.078em;
+}
+
+.film-hero-copy .hero-link {
+  color: #fff;
+}
+
+/* INTRO */
+.film-intro {
+  display: grid;
+  grid-template-columns: .65fr 1.35fr;
+  gap: 9vw;
+  padding: 150px 7vw 170px;
+}
+
+.film-intro-label {
+  padding-top: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 2.6px;
+  text-transform: uppercase;
+}
+
+.film-intro-copy {
+  max-width: 1000px;
+}
+
+.film-intro-copy > p:first-child {
+  font-size: clamp(38px, 5vw, 82px);
+  line-height: .98;
+  letter-spacing: -.052em;
+}
+
+.film-intro-secondary {
+  max-width: 670px;
+  margin-top: 58px;
+  margin-left: auto;
+  font-size: clamp(19px, 1.7vw, 27px);
+  line-height: 1.48;
+  letter-spacing: -.02em;
+}
+
+/* FALSE SCROLL */
+.frame-story {
+  position: relative;
+  height: 500vh;
+  background: #070807;
+}
+
+.frame-story-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.frame-stage {
+  width: 100%;
+  height: 100%;
+}
+
+.frame-stage > img {
+  position: absolute;
+  inset: 0;
+  opacity: 1;
+  transition: opacity .22s ease;
+  will-change: opacity, transform;
+}
+
+.frame-stage.is-changing > img {
+  opacity: .72;
+}
+
+.frame-interface {
+  position: absolute;
+  z-index: 6;
+  inset: auto 34px 28px 34px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  color: rgba(255,255,255,.88);
+}
+
+.frame-counter {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.frame-divider {
+  opacity: .45;
+}
+
+.frame-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.frame-dots span {
+  width: 5px;
+  height: 5px;
+  border: 1px solid rgba(255,255,255,.75);
+  border-radius: 50%;
+  transition: background .22s ease, transform .22s ease;
+}
+
+.frame-dots span.is-active {
+  background: #fff;
+  transform: scale(1.15);
+}
+
+.frame-loading {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #090a09;
+  color: rgba(255,255,255,.7);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  transition: opacity .5s ease, visibility .5s ease;
+}
+
+.frame-loading.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* STATEMENT */
+.film-statement {
+  min-height: 82svh;
+  display: grid;
+  place-items: center;
+  padding: 100px 24px;
+  text-align: center;
+  background: #fff;
+}
+
+.film-statement p {
+  font-size: clamp(58px, 9vw, 155px);
+  line-height: .84;
+  letter-spacing: -.075em;
+  font-weight: 500;
+}
+
+/* METHOD */
+.film-method {
+  padding: 150px 6vw 170px;
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.method-heading {
+  display: grid;
+  grid-template-columns: .25fr 1.75fr;
+  gap: 30px;
+  align-items: start;
+  margin-bottom: 120px;
+}
+
+.method-index {
+  font-size: 11px;
+  letter-spacing: 2px;
+  opacity: .48;
+}
+
+.method-heading h2 {
+  max-width: 1100px;
+  font-size: clamp(60px, 8vw, 140px);
+  line-height: .86;
+  letter-spacing: -.07em;
+  font-weight: 500;
+}
+
+.method-list {
+  border-top: 1px solid rgba(255,255,255,.28);
+}
+
+.method-list article {
+  display: grid;
+  grid-template-columns: .18fr .65fr 1.17fr;
+  gap: 30px;
+  padding: 30px 0 42px;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
+
+.method-list article > span {
+  font-size: 11px;
+  letter-spacing: 2px;
+  opacity: .45;
+}
+
+.method-list h3 {
+  font-size: clamp(28px, 3vw, 50px);
+  line-height: 1;
+  letter-spacing: -.04em;
+  font-weight: 500;
+}
+
+.method-list p {
+  max-width: 670px;
+  font-size: clamp(17px, 1.45vw, 23px);
+  line-height: 1.52;
+  color: rgba(255,255,255,.72);
+}
+
+/* CTA */
+.film-cta {
+  min-height: 92svh;
+  padding: 110px 6vw 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.film-cta .eyebrow {
+  color: var(--muted);
+}
+
+.film-cta p {
+  max-width: 1200px;
+  margin-top: 24px;
+  font-size: clamp(65px, 10vw, 170px);
+  line-height: .82;
+  letter-spacing: -.078em;
+  font-weight: 500;
+}
+
+.film-cta a {
+  width: fit-content;
+  margin-top: 62px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #000;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.film-cta a span {
+  margin-left: 14px;
+}
+
+/* FILM MOBILE */
+@media (max-width: 900px) {
+  .film-hero-copy {
+    left: 22px;
+    right: 22px;
+    bottom: 34px;
+  }
+
+  .film-hero-copy h1 {
+    font-size: 18vw;
+    line-height: .84;
+  }
+
+  .film-intro {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    padding: 100px 22px 120px;
+  }
+
+  .film-intro-copy > p:first-child {
+    font-size: 12vw;
+  }
+
+  .film-intro-secondary {
+    margin-top: 45px;
+    margin-left: 0;
+    font-size: 20px;
+  }
+
+  .frame-story {
+    height: 420vh;
+  }
+
+  .frame-interface {
+    inset: auto 20px 20px 20px;
+  }
+
+  .film-statement {
+    min-height: 70svh;
+  }
+
+  .film-statement p {
+    font-size: 15vw;
+  }
+
+  .film-method {
+    padding: 100px 22px 120px;
+  }
+
+  .method-heading {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 75px;
+  }
+
+  .method-heading h2 {
+    font-size: 14.5vw;
+  }
+
+  .method-list article {
+    grid-template-columns: .2fr .8fr;
+    gap: 18px;
+  }
+
+  .method-list article p {
+    grid-column: 2;
+    font-size: 17px;
+  }
+
+  .film-cta {
+    min-height: 78svh;
+    padding: 90px 22px 55px;
+  }
+
+  .film-cta p {
+    font-size: 16vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-image::after {
+    animation: none;
+  }
+
+  .frame-stage > img {
+    transition: none;
+  }
+}
+
+/* FOOTER — MINIMAL NOIR */
+.site-footer {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 100px 3.2vw 56px;
+  border: 0;
+  border-radius: 0;
+  background: #050505;
+  color: #fff;
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 10vw;
+}
+
+.site-footer h3 {
+  margin-bottom: 32px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.site-footer p {
+  max-width: 650px;
+  font-size: clamp(20px, 1.65vw, 28px);
+  line-height: 1.42;
+  letter-spacing: -.025em;
+  color: rgba(255,255,255,.84);
+}
+
+.contact-list {
+  list-style: none;
+  border-top: 1px solid rgba(255,255,255,.38);
+}
+
+.contact-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(255,255,255,.16);
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.contact-list strong {
+  font-weight: 700;
+}
+
+.contact-list span,
+.contact-list a {
+  color: rgba(255,255,255,.8);
+  text-align: right;
+}
+
+.contact-list a {
+  text-decoration: none;
+  transition: opacity .3s ease;
+}
+
+.contact-list a:hover {
+  opacity: .55;
+}
+
+@media (max-width: 900px) {
+  .site-footer {
+    padding: 72px 22px 38px;
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .site-footer p {
+    font-size: 20px;
+  }
+
+  .contact-list li {
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .contact-list span,
+  .contact-list a {
+    max-width: 62%;
+    overflow-wrap: anywhere;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .service-visual::after { animation: none; }
+}
+
+
+
+/* =========================================================
+   MECENATE v3.9 — THREE DISTINCT CINEMATIC HOVERS
+   Ogni servizio ha un movimento proprio, lento e narrativo.
+========================================================= */
+
+.service-card .service-visual img,
+.service-card .service-visual::before,
+.service-card .service-visual::after {
+  will-change: transform, opacity, filter, background-position;
+}
+
+/* Base: nessun movimento generico uguale per tutti */
+.service-card:hover .service-visual img {
+  transform: none;
+}
+
+/* ---------------------------------------------------------
+   01 — FILM & DIRECTION
+   Push-in lento + fuga di luce tungsteno.
+--------------------------------------------------------- */
+.service-film .service-visual img {
+  transform-origin: 58% 48%;
+}
+
+.service-film:hover .service-visual img {
+  transform: scale(1.055) translate3d(-1.2%, -.5%, 0);
+  filter: saturate(.92) contrast(1.09) brightness(.88) sepia(.20);
+}
+
+.service-film:hover .service-visual::before {
+  opacity: .82;
+  background-size: 170% 170%, 145% 145%;
+  animation: filmLightLeak 2.8s cubic-bezier(.22,.61,.36,1) both;
+}
+
+@keyframes filmLightLeak {
+  0% {
+    background-position: 110% 50%, 72% 25%;
+    transform: translateX(5%);
+  }
+  45% {
+    background-position: 48% 50%, 66% 28%;
+  }
+  100% {
+    background-position: -22% 50%, 60% 30%;
+    transform: translateX(-3%);
+  }
+}
+
+/* ---------------------------------------------------------
+   02 — DIGITAL SPACES
+   Deriva orizzontale + respiro fosforico del monitor.
+--------------------------------------------------------- */
+.service-digital .service-visual img {
+  transform-origin: 50% 52%;
+}
+
+.service-digital:hover .service-visual img {
+  transform: scale(1.035) translate3d(1.4%, -.8%, 0);
+  filter: saturate(.72) contrast(1.08) brightness(.82) sepia(.10);
+}
+
+.service-digital:hover .service-visual::before {
+  opacity: .76;
+  animation: digitalPhosphor 2.5s ease-in-out both;
+}
+
+.service-digital:hover .service-visual::after {
+  opacity: .14;
+  animation:
+    serviceGrain .28s steps(2) infinite,
+    digitalScan 2.4s ease-in-out both;
+}
+
+@keyframes digitalPhosphor {
+  0% {
+    filter: brightness(.9);
+    transform: scale(1);
+  }
+  50% {
+    filter: brightness(1.16);
+    transform: scale(1.015);
+  }
+  100% {
+    filter: brightness(1.02);
+    transform: scale(1.008);
+  }
+}
+
+@keyframes digitalScan {
+  0% { transform: translate3d(0,-2%,0); }
+  50% { transform: translate3d(0,2%,0); }
+  100% { transform: translate3d(0,0,0); }
+}
+
+/* ---------------------------------------------------------
+   03 — STRATEGY & CURATION
+   Leggero movimento da tavolo editoriale + luce ambrata.
+--------------------------------------------------------- */
+.service-strategy .service-visual img {
+  transform-origin: 46% 44%;
+}
+
+.service-strategy:hover .service-visual img {
+  transform: scale(1.04) translate3d(-.7%, -1%, 0) rotate(-.18deg);
+  filter: saturate(.78) contrast(1.05) brightness(.84) sepia(.31);
+}
+
+.service-strategy:hover .service-visual::before {
+  opacity: .80;
+  animation: strategyLamp 3.1s ease-in-out both;
+}
+
+@keyframes strategyLamp {
+  0% {
+    background-position: 0% 50%, 66% 36%;
+    filter: brightness(.92);
+  }
+  55% {
+    background-position: 18% 46%, 61% 33%;
+    filter: brightness(1.14);
+  }
+  100% {
+    background-position: 8% 50%, 64% 35%;
+    filter: brightness(1.02);
+  }
+}
+
+/* Il testo risponde appena, senza effetto “button”. */
+.service-card .service-title,
+.service-card .inline-link {
+  transition:
+    transform .9s cubic-bezier(.2,.8,.2,1),
+    letter-spacing .9s cubic-bezier(.2,.8,.2,1);
+}
+
+.service-card:hover .service-title {
+  transform: translateX(8px);
+}
+
+.service-card:hover .inline-link {
+  transform: translateX(5px);
+  letter-spacing: 1.45px;
+}
+
+@media (hover: none) {
+  .service-card:hover .service-visual img,
+  .service-card:hover .service-visual::before,
+  .service-card:hover .service-visual::after,
+  .service-card:hover .service-title,
+  .service-card:hover .inline-link {
+    animation: none;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card .service-visual img,
+  .service-card .service-visual::before,
+  .service-card .service-visual::after,
+  .service-card .service-title,
+  .service-card .inline-link {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+
+
+/* =========================================================
+   MECENATE v4.0 — EDITORIAL BLEED / NO DIVIDING LINES
+========================================================= */
+
+/* Nessuna linea orizzontale tra hero e servizi o tra i servizi. */
+.services,
+.service-card {
+  border: 0 !important;
+}
+
+.service-card {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+.service-copy {
+  position: relative;
+  z-index: 4;
+  background: #fff;
+}
+
+/* L'immagine occupa interamente la propria metà. */
+.service-visual {
+  padding: 0;
+  overflow: visible;
+  z-index: 2;
+}
+
+.service-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  aspect-ratio: auto;
+  object-fit: cover;
+  box-shadow: none;
+}
+
+/* Anche tinta e grana seguono l'intera immagine. */
+.service-visual::before {
+  inset: 0;
+}
+
+.service-visual::after {
+  inset: -12%;
+}
+
+/* Sangria editoriale di 30 px:
+   la fotografia entra nel foglio bianco e scompare con una maschera,
+   senza blur e senza bordo netto. */
+
+/* Film e Strategy: immagine a sinistra, dissolvenza verso destra. */
+.service-card.reverse .service-visual {
+  width: calc(100% + 30px);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0,
+    #000 calc(100% - 30px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 0,
+    #000 calc(100% - 30px),
+    transparent 100%
+  );
+}
+
+/* Digital: immagine a destra, dissolvenza verso sinistra. */
+.service-card:not(.reverse) .service-visual {
+  width: calc(100% + 30px);
+  margin-left: -30px;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 30px,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 30px,
+    #000 100%
+  );
+}
+
+/* Evita qualsiasi fessura sub-pixel tra i due pannelli. */
+.service-card.reverse .service-copy {
+  margin-left: -1px;
+}
+
+.service-card:not(.reverse) .service-copy {
+  margin-right: -1px;
+}
+
+/* Mobile: composizione pulita, senza sovrapposizioni laterali. */
+@media (max-width: 900px) {
+  .service-visual,
+  .service-card.reverse .service-visual,
+  .service-card:not(.reverse) .service-visual {
+    width: 100%;
+    margin: 0;
+    min-height: 68vw;
+    padding: 0;
+    overflow: hidden;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .service-visual::before {
+    inset: 0;
+  }
+
+  .service-card.reverse .service-copy,
+  .service-card:not(.reverse) .service-copy {
+    margin: 0;
+  }
+}
+
+
+/* =========================================================
+   MECENATE v4.1 — DISCREET WHATSAPP CONTACT
+========================================================= */
+.whatsapp-popup {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 2500;
+  width: min(340px, calc(100vw - 44px));
+  padding: 22px 22px 20px;
+  background: rgba(5,5,5,.96);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.22);
+  box-shadow: 0 22px 70px rgba(0,0,0,.28);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0,18px,0);
+  transition:
+    opacity .75s cubic-bezier(.2,.8,.2,1),
+    transform .75s cubic-bezier(.2,.8,.2,1),
+    visibility .75s;
+}
+
+.whatsapp-popup.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0,0,0);
+}
+
+.whatsapp-label {
+  display: block;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,.56);
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.whatsapp-popup p {
+  max-width: 270px;
+  margin: 0 0 26px;
+  font-size: clamp(22px, 2.1vw, 31px);
+  line-height: 1.08;
+  letter-spacing: -.8px;
+}
+
+.whatsapp-popup > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,.34);
+  color: #fff;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.whatsapp-popup > a span {
+  font-size: 21px;
+  font-weight: 300;
+  transition: transform .4s ease;
+}
+
+.whatsapp-popup > a:hover span {
+  transform: translateX(5px);
+}
+
+.whatsapp-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,.7);
+  font: 300 24px/1 Arial, sans-serif;
+  cursor: pointer;
+  transition: color .25s ease, transform .25s ease;
+}
+
+.whatsapp-close:hover {
+  color: #fff;
+  transform: rotate(5deg);
+}
+
+@media (max-width: 640px) {
+  .whatsapp-popup {
+    right: 12px;
+    bottom: 12px;
+    width: calc(100vw - 24px);
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-popup {
+    transition: opacity .2s linear, visibility .2s linear;
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   MECENATE v4.2 — LANGUAGE INSIDE THE EXPANDED MENU
+========================================================= */
+.menu-language {
+  position: absolute;
+  left: clamp(24px, 5vw, 72px);
+  bottom: 62px;
+  display: flex;
+  align-items: flex-end;
+  gap: 28px;
+  color: #fff;
+}
+
+.menu-language-label {
+  padding-bottom: 5px;
+  color: rgba(255,255,255,.38);
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.menu-language-options {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.menu-language button {
+  position: relative;
+  border: 0;
+  padding: 0 0 5px;
+  background: transparent;
+  color: rgba(255,255,255,.42);
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: .9px;
+  cursor: pointer;
+  transition: color .35s ease;
+}
+
+.menu-language button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: #fff;
+  transition: right .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.menu-language button:hover,
+.menu-language button.is-active {
+  color: #fff;
+}
+
+.menu-language button.is-active::after {
+  right: 0;
+}
+
+.site-menu .menu-footer {
+  bottom: 24px;
+}
+
+@media (max-width: 700px) {
+  .menu-language {
+    left: 22px;
+    right: 22px;
+    bottom: 70px;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .menu-language-options {
+    gap: 14px;
+  }
+
+  .menu-language button {
+    font-size: 10px;
+  }
+
+  .site-menu .menu-footer {
+    bottom: 24px;
+  }
+}
+
+
+
+/* =========================================================
+   MECENATE v4.3 — MOBILE HERO + MENU LANGUAGE FIX
+========================================================= */
+
+/* Il menu è bianco: lingue e footer devono essere neri. */
+.menu-language {
+  color: #050505;
+}
+
+.menu-language-label {
+  color: rgba(5,5,5,.42);
+}
+
+.menu-language button {
+  color: rgba(5,5,5,.44);
+}
+
+.menu-language button::after {
+  background: #050505;
+}
+
+.menu-language button:hover,
+.menu-language button.is-active {
+  color: #050505;
+}
+
+.site-menu .menu-footer {
+  color: rgba(5,5,5,.52);
+}
+
+/* Mobile: il menu usa tutta l'altezza reale disponibile e
+   mantiene lingue/footer sempre visibili sopra la safe area. */
+@media (max-width: 900px) {
+  .site-menu {
+    height: 100dvh;
+    min-height: 100svh;
+    padding:
+      calc(94px + env(safe-area-inset-top))
+      22px
+      calc(26px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+  }
+
+  .site-menu a {
+    flex: 0 0 auto;
+    font-size: clamp(44px, 13vw, 66px);
+    line-height: .92;
+    margin-bottom: 12px;
+  }
+
+  .menu-language {
+    position: static;
+    margin-top: auto;
+    padding-top: 34px;
+    padding-bottom: 18px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .menu-language-options {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .site-menu .menu-footer {
+    position: static;
+    margin-top: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* HERO MOBILE
+   Riduce la scala senza perdere impatto e impedisce qualsiasi
+   parola tagliata lateralmente. */
+@media (max-width: 700px) {
+  .hero-home {
+    min-height: 100svh;
+    height: auto;
+  }
+
+  .hero-home video,
+  .hero-home .hero-fallback {
+    object-position: 56% center;
+  }
+
+  .hero-home-content {
+    left: 20px;
+    right: 20px;
+    bottom: max(32px, calc(22px + env(safe-area-inset-bottom)));
+    max-width: calc(100vw - 40px);
+  }
+
+  .eyebrow {
+    max-width: 100%;
+    margin-bottom: 18px;
+    font-size: 10px;
+    line-height: 1.35;
+    letter-spacing: 2.1px;
+  }
+
+  .hero-home h1 {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(42px, 11.25vw, 54px);
+    line-height: .91;
+    letter-spacing: -.068em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    text-wrap: balance;
+  }
+
+  .hero-description {
+    max-width: 31ch;
+    margin-top: 22px;
+    font-size: 17px;
+    line-height: 1.42;
+  }
+
+  .hero-link {
+    margin-top: 28px;
+    font-size: 12px;
+  }
+}
+
+/* iPhone piccoli */
+@media (max-width: 390px) {
+  .hero-home h1 {
+    font-size: clamp(39px, 10.9vw, 45px);
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+
+  .brand {
+    font-size: 11px;
+    letter-spacing: 6px;
+    padding-left: 6px;
+  }
+}
+
+/* Popup più discreto su telefono: non copre metà della pagina. */
+@media (max-width: 640px) {
+  .whatsapp-popup {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    width: calc(100vw - 24px);
+    padding: 17px 18px 16px;
+  }
+
+  .whatsapp-label {
+    margin-bottom: 18px;
+    font-size: 9px;
+  }
+
+  .whatsapp-popup p {
+    max-width: 250px;
+    margin-bottom: 18px;
+    font-size: 23px;
+  }
+
+  .whatsapp-popup > a {
+    padding-top: 12px;
+  }
 }

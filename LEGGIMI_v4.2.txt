@@ -1,0 +1,26 @@
+MECENATE v4.2 — LANGUAGE INSIDE MENU
+
+La selezione della lingua è stata rimossa dall'hero e collocata
+nella parte bassa laterale del menu nero apribile.
+
+LINGUE
+- Italiano
+- English
+- Español
+
+COMPORTAMENTO
+- il controllo appare soltanto quando si apre il menu;
+- la lingua attiva è indicata da una linea sottile;
+- la scelta viene ricordata dal browser;
+- nessun elemento aggiunto all'hero;
+- layout mobile incluso.
+
+INSTALLAZIONE
+Sostituisci tutti i file nella cartella:
+~/Documents/mecenate-studio-v2
+
+Poi:
+cd ~/Documents/mecenate-studio-v2
+git add .
+git commit -m "Move language selector inside navigation menu"
+git push
