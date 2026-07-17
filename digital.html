@@ -13,7 +13,15 @@
 </head>
 <body>
   <header class="site-header"><div class="header-inner"><button class="menu-toggle" aria-label="Apri il menu" aria-expanded="false"><span></span><span></span></button><a class="brand" href="index.html">Mecenate</a></div></header>
-  <nav class="site-menu"><a href="index.html#studio">Studio</a><a href="film.html">Film</a><a href="digital.html">Digital</a><a href="direction.html">Direction</a><a href="index.html#contatti">Contatti</a><div class="menu-footer">Roma · Working internationally</div></nav>
+  <nav class="site-menu"><a href="index.html#studio" data-i18n="nav.studio">Studio</a><a href="film.html">Film</a><a href="digital.html">Digital</a><a href="direction.html" data-i18n="nav.direction">Direction</a><a href="index.html#contatti" data-i18n="nav.contacts">Contatti</a><div class="menu-language" aria-label="Seleziona lingua">
+      <span class="menu-language-label">Lingua</span>
+      <div class="menu-language-options">
+        <button type="button" data-lang="it" class="is-active">Italiano</button>
+        <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="es">Español</button>
+      </div>
+    </div>
+    <div class="menu-footer" data-i18n="menu.footer">Roma · Working internationally</div></nav>
   <main>
     <section class="internal-hero"><img src="foto2.jpg" alt="Spazio digitale minimale in bianco e nero"></section>
     <section class="internal-title">

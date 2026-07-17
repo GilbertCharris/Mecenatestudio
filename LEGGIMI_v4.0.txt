@@ -1,0 +1,26 @@
+MECENATE v4.0 — EDITORIAL BLEED / NO LINES
+
+MODIFICHE
+1. Eliminata la linea orizzontale visibile tra hero e servizi.
+2. Eliminate tutte le linee divisorie tra i tre servizi.
+3. Le fotografie riempiono completamente la propria metà.
+4. Ogni fotografia invade il fondo bianco di 30 px.
+5. La transizione usa una maschera progressiva:
+   - nessun blur;
+   - nessun bordo;
+   - nessuna fascia bianca;
+   - effetto simile a un'immagine stampata sulla carta.
+6. Restano attive le tre animazioni hover:
+   - Film: push-in + fuga di luce;
+   - Digital: respiro fosforico;
+   - Strategy: luce ambrata editoriale.
+
+INSTALLAZIONE
+Sostituisci tutti i file nella cartella:
+~/Documents/mecenate-studio-v2
+
+Poi:
+cd ~/Documents/mecenate-studio-v2
+git add .
+git commit -m "Remove dividers and add editorial image bleed"
+git push

@@ -25,12 +25,20 @@
   </header>
 
   <nav class="site-menu" aria-label="Navigazione principale">
-    <a href="index.html#studio">Studio</a>
+    <a href="index.html#studio" data-i18n="nav.studio">Studio</a>
     <a href="film.html" aria-current="page">Film</a>
     <a href="digital.html">Digital</a>
-    <a href="direction.html">Direction</a>
-    <a href="index.html#contatti">Contatti</a>
-    <div class="menu-footer">Roma · Working internationally</div>
+    <a href="direction.html" data-i18n="nav.direction">Direction</a>
+    <a href="index.html#contatti" data-i18n="nav.contacts">Contatti</a>
+    <div class="menu-language" aria-label="Seleziona lingua">
+      <span class="menu-language-label">Lingua</span>
+      <div class="menu-language-options">
+        <button type="button" data-lang="it" class="is-active">Italiano</button>
+        <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="es">Español</button>
+      </div>
+    </div>
+    <div class="menu-footer" data-i18n="menu.footer">Roma · Working internationally</div>
   </nav>
 
   <main>
