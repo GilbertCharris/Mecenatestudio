@@ -1307,3 +1307,104 @@ img, video { display: block; max-width: 100%; }
     grid-template-columns: 1fr;
   }
 }
+
+
+
+/* =========================================================
+   MECENATE v3.7 — FULL-BLEED SERVICES + ORIGINAL PORTRAIT
+========================================================= */
+
+/* Elimina la linea chiara e l'effetto “immagine dentro una cornice”.
+   Ogni fotografia ora riempie completamente la propria metà. */
+.service-card {
+  gap: 0;
+  border-top: 0;
+  background: #fff;
+}
+
+.service-visual {
+  padding: 0;
+  align-items: stretch;
+  justify-content: stretch;
+  min-width: 0;
+}
+
+.service-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  aspect-ratio: auto;
+  object-fit: cover;
+  box-shadow: none;
+}
+
+.service-visual::before {
+  inset: 0;
+}
+
+.service-visual::after {
+  inset: -12%;
+}
+
+/* Una piccola invasione elimina eventuali fessure sub-pixel
+   tra fotografia e pannello bianco senza creare un bordo visibile. */
+.service-card:not(.reverse) .service-copy {
+  margin-left: -1px;
+}
+
+.service-card.reverse .service-copy {
+  margin-right: -1px;
+}
+
+/* Ritorno alla fotografia originale, nitida e isolata su fondo bianco. */
+.about {
+  background: #fff;
+}
+
+.about-image {
+  box-shadow: 0 22px 55px rgba(0,0,0,.08);
+}
+
+.about-image img {
+  transform: scale(1.001);
+}
+
+/* Disattiva completamente il precedente sfondo fotografico sfocato. */
+.about-continuation,
+.about-photo-field,
+.about-photo-blur,
+.about-sharp-window,
+.about-photo-sharp,
+.about-copy-panel {
+  all: unset;
+}
+
+@media (max-width: 900px) {
+  .service-visual {
+    min-height: 68vw;
+    padding: 0;
+  }
+
+  .service-visual::before {
+    inset: 0;
+  }
+
+  .service-visual::after {
+    inset: -12%;
+  }
+
+  .service-card:not(.reverse) .service-copy,
+  .service-card.reverse .service-copy {
+    margin: 0;
+  }
+
+  .about {
+    padding: 80px 22px;
+  }
+
+  .about-image {
+    box-shadow: 0 16px 40px rgba(0,0,0,.08);
+  }
+}
