@@ -12,24 +12,24 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header"><div class="header-inner"><button class="menu-toggle" aria-label="Apri il menu" aria-expanded="false"><span></span><span></span></button><a class="brand" href="index.html">Mecenate</a></div></header>
-  <nav class="site-menu"><a href="index.html#studio">Studio</a><a href="film.html">Film</a><a href="digital.html">Digital</a><a href="direction.html">Direction</a><a href="index.html#contatti">Contatti</a><div class="menu-footer">Roma · Working internationally</div></nav>
+  <header class="site-header"><div class="header-inner"><button class="menu-toggle" aria-label="Apri il menu" aria-expanded="false"><span></span><span></span></button><a class="brand" href="index.html">Mecenate</a><div class="language-switcher" aria-label="Seleziona lingua"><button type="button" data-lang="it" class="is-active">IT</button><span>/</span><button type="button" data-lang="en">EN</button><span>/</span><button type="button" data-lang="es">ES</button></div></div></header>
+  <nav class="site-menu"><a href="index.html#studio" data-i18n="nav.studio">Studio</a><a href="film.html" data-i18n="nav.film">Film</a><a href="digital.html" data-i18n="nav.digital">Digital</a><a href="direction.html" data-i18n="nav.direction">Direction</a><a href="index.html#contatti" data-i18n="nav.contacts">Contatti</a><div class="menu-footer" data-i18n="menu.footer">Roma · Working internationally</div></nav>
   <main>
     <section class="internal-hero"><img src="foto2.jpg" alt="Spazio digitale minimale in bianco e nero"></section>
     <section class="internal-title">
       <h1>Digital Spaces</h1>
-      <p>Un sito non è un catalogo, ma il luogo digitale in cui un progetto prende forma. Spazio, tipografia e ritmo diventano parte della sua identità.</p>
+      <p data-i18n="digital.intro">Un sito non è un catalogo, ma il luogo digitale in cui un progetto prende forma. Spazio, tipografia e ritmo diventano parte della sua identità.</p>
     </section>
     <section class="editorial-block">
       <div class="editorial-copy">
-        <h2>Il nostro approccio</h2>
+        <h2 data-i18n="common.approach">Il nostro approccio</h2>
         <p>Progettiamo siti web su misura, senza affidare l’identità a modelli preconfezionati. Ogni pagina nasce dalla materia visiva e narrativa del progetto.</p>
         <p>Applichiamo principi di design editoriale, composizione cinematografica e sviluppo essenziale per costruire esperienze rapide, leggibili e riconoscibili.</p>
         <p>La tecnologia resta discreta. Il protagonista è il tuo lavoro.</p>
       </div>
       <div class="editorial-image"><img src="foto2.jpg" alt="Interfaccia digitale immersiva"></div>
     </section>
-    <section class="cta"><p>Costruiamo lo spazio digitale in cui il tuo progetto possa vivere senza distrazioni.</p><a href="mailto:mecenatestudio@proton.me?subject=Digital%20Spaces">⟶ Avvia un progetto</a></section>
+    <section class="cta"><p>Costruiamo lo spazio digitale in cui il tuo progetto possa vivere senza distrazioni.</p><a href="mailto:mecenatestudio@proton.me?subject=Digital%20Spaces">⟶ <span data-i18n="common.start">Avvia un progetto</span></a></section>
   </main>
   <script src="main.js"></script>
 </body>
