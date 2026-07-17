@@ -201,6 +201,8 @@ img, video { display: block; max-width: 100%; }
   max-width: 95%;
 }
 .service-visual {
+  position: relative;
+  isolation: isolate;
   background: var(--soft);
   display: flex;
   align-items: center;
@@ -208,15 +210,95 @@ img, video { display: block; max-width: 100%; }
   padding: 6vw;
   overflow: hidden;
 }
+
 .service-visual img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
-  filter: grayscale(100%) contrast(120%);
-  transition: transform .8s cubic-bezier(.2,.8,.2,1);
-  box-shadow: 0 18px 48px rgba(0,0,0,.08);
+  transition: transform 1.15s cubic-bezier(.2,.8,.2,1), filter .8s ease;
+  box-shadow: 0 18px 48px rgba(0,0,0,.10);
 }
-.service-card:hover img { transform: scale(1.025); }
+
+/* Colore analogico: la tinta appartiene al servizio, non alla singola foto. */
+.service-visual::before,
+.service-visual::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.service-visual::before {
+  z-index: 2;
+  inset: 6vw;
+  mix-blend-mode: color;
+  opacity: .82;
+  transition: opacity .8s ease;
+}
+
+.service-visual::after {
+  z-index: 3;
+  inset: calc(6vw - 12%);
+  opacity: .105;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.72'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+  animation: serviceGrain .28s steps(2) infinite;
+}
+
+/* 01 — FILM: rosso tungsteno / pellicola sovraesposta */
+.service-film .service-visual {
+  background: #170806;
+}
+.service-film .service-visual img {
+  filter: saturate(.82) contrast(1.12) brightness(.82) sepia(.18);
+}
+.service-film .service-visual::before {
+  background:
+    linear-gradient(125deg, rgba(255,42,9,.88), rgba(105,8,3,.40) 58%, rgba(10,2,1,.12)),
+    radial-gradient(circle at 72% 25%, rgba(255,180,92,.30), transparent 42%);
+}
+
+/* 02 — DIGITAL: verde oliva / monitor fosforico */
+.service-digital .service-visual {
+  background: #0d1210;
+}
+.service-digital .service-visual img {
+  filter: saturate(.58) contrast(1.04) brightness(.76) sepia(.13);
+}
+.service-digital .service-visual::before {
+  background:
+    linear-gradient(118deg, rgba(28,55,48,.82), rgba(139,139,91,.32) 68%, rgba(7,12,10,.18)),
+    radial-gradient(circle at 22% 18%, rgba(210,213,160,.18), transparent 38%);
+}
+
+/* 03 — STRATEGY: ambra / carta e luce da tavolo */
+.service-strategy .service-visual {
+  background: #170e08;
+}
+.service-strategy .service-visual img {
+  filter: saturate(.68) contrast(1.08) brightness(.78) sepia(.28);
+}
+.service-strategy .service-visual::before {
+  background:
+    linear-gradient(125deg, rgba(129,62,20,.70), rgba(240,155,71,.30) 52%, rgba(34,15,7,.35)),
+    radial-gradient(circle at 66% 36%, rgba(255,201,119,.25), transparent 44%);
+}
+
+.service-card:hover .service-visual img {
+  transform: scale(1.022);
+}
+.service-card:hover .service-visual::before {
+  opacity: .68;
+}
+
+@keyframes serviceGrain {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(-2%,1.5%); }
+  50% { transform: translate(1.5%,-2%); }
+  75% { transform: translate(2%,2%); }
+  100% { transform: translate(-1.5%,-1%); }
+}
 
 /* MANIFESTO */
 .manifesto {
@@ -396,7 +478,9 @@ img, video { display: block; max-width: 100%; }
   .service-card,
   .service-card.reverse { display: flex; flex-direction: column; min-height: 0; }
   .service-copy { order: 1 !important; padding: 72px 24px 42px; }
-  .service-visual { order: 2 !important; padding: 0 24px 70px; background: #fff; }
+  .service-visual { order: 2 !important; padding: 0 24px 70px; }
+  .service-visual::before { inset: 0 24px 70px; }
+  .service-visual::after { inset: -12% -8% calc(70px - 12%) -8%; }
   .service-title { font-size: 13vw; }
   .about { padding: 80px 22px; }
   .about-grid { grid-template-columns: 1fr; gap: 46px; }
@@ -948,3 +1032,7 @@ img, video { display: block; max-width: 100%; }
   }
 }
 
+
+@media (prefers-reduced-motion: reduce) {
+  .service-visual::after { animation: none; }
+}
