@@ -12,32 +12,24 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header"><div class="header-inner"><button class="menu-toggle" aria-label="Apri il menu" aria-expanded="false"><span></span><span></span></button><a class="brand" href="index.html">Mecenate</a></div></header>
-  <nav class="site-menu"><a href="index.html#studio" data-i18n="nav.studio">Studio</a><a href="film.html">Film</a><a href="digital.html">Digital</a><a href="direction.html" data-i18n="nav.direction">Direction</a><a href="index.html#contatti" data-i18n="nav.contacts">Contatti</a><div class="menu-language" aria-label="Seleziona lingua">
-      <span class="menu-language-label">Lingua</span>
-      <div class="menu-language-options">
-        <button type="button" data-lang="it" class="is-active">Italiano</button>
-        <button type="button" data-lang="en">English</button>
-        <button type="button" data-lang="es">Español</button>
-      </div>
-    </div>
-    <div class="menu-footer" data-i18n="menu.footer">Roma · Working internationally</div></nav>
+  <header class="site-header"><div class="header-inner"><button class="menu-toggle" aria-label="Apri il menu" aria-expanded="false"><span></span><span></span></button><a class="brand" href="index.html">Mecenate</a><div class="language-switcher" aria-label="Seleziona lingua"><button type="button" data-lang="it" class="is-active">IT</button><span>/</span><button type="button" data-lang="en">EN</button><span>/</span><button type="button" data-lang="es">ES</button></div></div></header>
+  <nav class="site-menu"><a href="index.html#studio" data-i18n="nav.studio">Studio</a><a href="film.html" data-i18n="nav.film">Film</a><a href="digital.html" data-i18n="nav.digital">Digital</a><a href="direction.html" data-i18n="nav.direction">Direction</a><a href="index.html#contatti" data-i18n="nav.contacts">Contatti</a><div class="menu-footer" data-i18n="menu.footer">Roma · Working internationally</div></nav>
   <main>
     <section class="internal-hero"><img src="foto3.jpg" alt="Materiali di ricerca e direzione creativa"></section>
     <section class="internal-title">
       <h1>Strategy & Curation</h1>
-      <p>Una presenza digitale autorevole non nasce dall’accumulo, ma dalla selezione. Ogni immagine, testo e pubblicazione deve appartenere allo stesso racconto.</p>
+      <p data-i18n="strategy.intro">Una presenza digitale autorevole non nasce dall’accumulo, ma dalla selezione. Ogni immagine, testo e pubblicazione deve appartenere allo stesso racconto.</p>
     </section>
     <section class="editorial-block">
       <div class="editorial-copy">
-        <h2>Il nostro approccio</h2>
+        <h2 data-i18n="common.approach">Il nostro approccio</h2>
         <p>Definiamo il linguaggio visivo, il posizionamento e la struttura narrativa del progetto, creando continuità tra film, sito web e canali digitali.</p>
         <p>La curatela sostituisce la produzione indiscriminata: selezioniamo ciò che merita di essere mostrato, stabilendo ritmo, gerarchie e tono.</p>
         <p>Meno rumore. Più identità.</p>
       </div>
       <div class="editorial-image"><img src="foto3.jpg" alt="Tavolo di curatela visiva e strategia"></div>
     </section>
-    <section class="cta"><p>Definiamo un’identità capace di restare coerente in ogni punto di contatto.</p><a href="mailto:mecenatestudio@proton.me?subject=Strategy%20%26%20Curation">⟶ Avvia un progetto</a></section>
+    <section class="cta"><p>Definiamo un’identità capace di restare coerente in ogni punto di contatto.</p><a href="mailto:mecenatestudio@proton.me?subject=Strategy%20%26%20Curation">⟶ <span data-i18n="common.start">Avvia un progetto</span></a></section>
   </main>
   <script src="main.js"></script>
 </body>
